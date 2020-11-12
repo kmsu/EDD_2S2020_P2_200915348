@@ -1,0 +1,52 @@
+digraph G {
+node[shape = record fontname="Arial" fontsize="10" ,style = filled];
+graph [nodesep = 0.4]
+label = < <font color='deepskyblue'> <font point-size='20'>Tabla Hash con direccionamiento abierto: LUGARES</font></font>>;labelloc=t;
+rankdir=LR;
+node [shape=record,width=.1,height=.1];
+N0 [label = " 
+<f0> \n \n Indice: 0 \n \n \n|
+<f1> \n \n Indice: 1 \n \n \n|
+<f2> \n \n Indice: 2 \n \n \n|
+<f3> \n \n Indice: 3 \n \n \n|
+<f4> \n \n Indice: 4 \n \n \n|
+<f5> \n \n Indice: 5 \n \n \n|
+<f6> \n \n Indice: 6 \n \n \n|
+<f7> \n \n Indice: 7 \n \n \n|
+<f8> \n \n Indice: 8 \n \n \n|
+<f9> \n \n Indice: 9 \n \n \n|
+<f10> \n \n Indice: 10 \n \n \n|
+<f11> \n \n Indice: 11 \n \n \n|
+<f12> \n \n Indice: 12\n \n \n ", height=2];
+node [shape=component]
+node [shape=record,width=.1,height=.1];
+N1 [label = " 
+<f0> \n \n Null \n \n \n|
+<f1> Id: 3 \n Categoria: Gasolinera \n Nombre: Gasolinera puma quetzal \n Latitud: 14.536 \n Longitud: -90.5868|
+<f2> \n \n Null \n \n \n|
+<f3> Id: 2 \n Categoria: Plaza \n Nombre: Plaza Villa nueva \n Latitud: 14.533 \n Longitud: -90.5852|
+<f4> \n \n Null \n \n \n|
+<f5> \n \n Null \n \n \n|
+<f6> \n \n Null \n \n \n|
+<f7> \n \n Null \n \n \n|
+<f8> \n \n Null \n \n \n|
+<f9> \n \n Null \n \n \n|
+<f10> \n \n Null \n \n \n|
+<f11> Id: 1 \n Categoria: USAC \n Nombre: T-3 \n Latitud: 14.5877 \n Longitud: -90.5536|
+<f12> \n \n Null \n \n \n ", height=2];
+node [shape=component]
+N0:f0 -> N1:f0
+N0:f1 -> N1:f1
+N0:f2 -> N1:f2
+N0:f3 -> N1:f3
+N0:f4 -> N1:f4
+N0:f5 -> N1:f5
+N0:f6 -> N1:f6
+N0:f7 -> N1:f7
+N0:f8 -> N1:f8
+N0:f9 -> N1:f9
+N0:f10 -> N1:f10
+N0:f11 -> N1:f11
+N0:f12 -> N1:f12
+factor  [label = "factor: 0.231"];
+}
