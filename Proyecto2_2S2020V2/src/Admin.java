@@ -65,6 +65,7 @@ public class Admin extends javax.swing.JFrame {
         jbLugares = new javax.swing.JButton();
         jbReporteLugares = new javax.swing.JButton();
         jbLocalidadesUsuario = new javax.swing.JButton();
+        jbLocalidadesConductores = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Administrador");
@@ -124,6 +125,13 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
+        jbLocalidadesConductores.setText("Localidades Conductores");
+        jbLocalidadesConductores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLocalidadesConductoresActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -134,10 +142,6 @@ public class Admin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(86, 86, 86))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(154, 154, 154)
-                .addComponent(jbVolver)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,6 +161,15 @@ public class Admin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbReporteLugares)
                 .addGap(73, 73, 73))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(154, 154, 154)
+                        .addComponent(jbVolver))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jbLocalidadesConductores)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,7 +190,9 @@ public class Admin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbReporteLugares)
                     .addComponent(jbLocalidadesUsuario))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jbLocalidadesConductores)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addComponent(jbVolver)
                 .addGap(21, 21, 21))
         );
@@ -428,6 +443,57 @@ public class Admin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbLocalidadesUsuarioActionPerformed
 
+    private void jbLocalidadesConductoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLocalidadesConductoresActionPerformed
+        FileReader fr = null;
+        //selector de archivos
+        JFileChooser seleccionar = new JFileChooser();
+        //filtro para que solo aparezcan los archivos json
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Json (*.json)", "json");
+        seleccionar.setFileFilter(filtro);
+        if(seleccionar.showDialog(null, "Abrir") == JFileChooser.APPROVE_OPTION){
+            String path = seleccionar.getSelectedFile().toString();
+            try {
+                JSONParser parser = new JSONParser();
+                Object obj = parser.parse(new FileReader(path));//obj es el archivo tipo json
+                JSONObject jObject = (JSONObject) obj;//convierto el objeto en json
+                JSONArray localidades = (JSONArray) jObject.get("localidades");
+                int size = localidades.size();
+                for(int i = 0; i < size; i++){
+                    JSONObject jLocalidad = (JSONObject) localidades.get(i);
+                    //la libreria reconoce los numeros como long por eso debo pasarlo a int
+                    int id = (int)(long)jLocalidad.get("id_conductor");
+                    //System.out.println("\nid: " + id);
+                    
+                    String lugar = (String)jLocalidad.get("lugar");
+                    //System.out.println("Categoria: "+ categoria);
+                    
+                    boolean disponibilidad = (boolean)jLocalidad.get("disponibilidad");
+                    NodoTablaHash nuevaLocalidad = tablaHash.buscar(lugar);
+                    if(nuevaLocalidad != null){
+                        double latitud = 0, longitud = 0;
+                        latitud = nuevaLocalidad.latitud;
+                        longitud = nuevaLocalidad.longitud;
+                        usuario.localidades2(id, latitud, longitud, disponibilidad);
+                    }
+                }
+                JOptionPane.showMessageDialog(this, "Lectura del fichero con exito");
+            }catch(Exception e){
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "No se pudo completar la lectura del archivo");
+            }finally{
+                // En el finally cerramos el fichero, para asegurarnos
+                // que se cierra tanto si todo va bien como si salta una excepcion.
+                try{                    
+                   if( null != fr ){   
+                      fr.close();     
+                   }                  
+                }catch (Exception e2){ 
+                   e2.printStackTrace();
+                }
+            }
+        }
+    }//GEN-LAST:event_jbLocalidadesConductoresActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -466,6 +532,7 @@ public class Admin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton jbCargarUsuarios;
+    private javax.swing.JButton jbLocalidadesConductores;
     private javax.swing.JButton jbLocalidadesUsuario;
     private javax.swing.JButton jbLugares;
     private javax.swing.JButton jbReporteLugares;

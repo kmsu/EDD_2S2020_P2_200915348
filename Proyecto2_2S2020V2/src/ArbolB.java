@@ -289,6 +289,47 @@ public class ArbolB {
         }
     }
     
+    boolean disponibilidad = true;
+    //Para cargar conductores
+    public void localidades2(int num, double latitud, double longitud, boolean dispo){
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.disponibilidad = dispo;
+        int valor = searchLocalidades2(root, num);
+        
+        if(valor == -1){
+            System.out.println("No se ha encontrado un nodo con el valor ingresado");
+        }else{
+            System.out.println("Se encontro el valor " + valor);
+        }
+    }
+    
+    private int searchLocalidades2(nodoArbolB actual, int key){
+        int i = 0;//se empieza a buscar siempre en la primera posicion
+        
+        //Incrementa el indice mientras el valor de la clave del nodo sea menor
+        while(i < actual.n && key > actual.key[i].id){
+            i++;
+        }
+        
+        //si la clave es igual, entonces retornamos el nodo
+        if(i < actual.n && key == actual.key[i].id){
+            actual.key[i].latitud = latitud;
+            actual.key[i].longitud = longitud;
+            actual.key[i].disponibilidad = disponibilidad;
+            return actual.key[i].id;//retorna el valor
+        }else{
+            //se revisa primero si tiene hijos
+            if(actual.leaf){
+                return -1;
+                //return null;
+            }else{
+                //si tiene hijos, hace una llamada recursiva
+                return searchLocalidades2(actual.child[i], key);
+            }
+        }
+    }
+    
     public void eliminar(Usuario key){
        //System.out.println("key " + key);
        tipoActual = false;//variable global
