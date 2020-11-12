@@ -66,8 +66,8 @@ public class HashTable {
         for (char caracter : cadena.toCharArray()) {
             suma += (int) caracter;
         }
-        System.out.println("cadena: " + cadena);
-        System.out.println("suma ascii " + suma);
+        //System.out.println("cadena: " + cadena);
+        //System.out.println("suma ascii " + suma);
         return suma;
     }
     

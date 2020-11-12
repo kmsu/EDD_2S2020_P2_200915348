@@ -34,7 +34,7 @@ public class UsuarioConductor extends javax.swing.JFrame {
         jlNombre.setText(actual.nombre);
         jlCorreo.setText(actual.correo);
         jlNumero.setText(actual.telefono);
-        
+        jlPassWord.setText(actual.contraseña);
     }
 
     /**
@@ -57,6 +57,8 @@ public class UsuarioConductor extends javax.swing.JFrame {
         jlCorreo = new javax.swing.JLabel();
         jlNumero = new javax.swing.JLabel();
         jbCerrarSesion = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jlPassWord = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Usuario Conductor");
@@ -106,6 +108,12 @@ public class UsuarioConductor extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel3.setText("PassWord");
+
+        jlPassWord.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jlPassWord.setText("jLabel6");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -115,24 +123,27 @@ public class UsuarioConductor extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jbModificarPerfil)
-                        .addGap(18, 18, 18)
+                        .addGap(85, 85, 85)
                         .addComponent(jbCerrarCuenta)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
                         .addComponent(jbCerrarSesion))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(32, 32, 32)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlUsuario)
                             .addComponent(jlNombre)
                             .addComponent(jlCorreo)
-                            .addComponent(jlNumero))))
-                .addContainerGap(53, Short.MAX_VALUE))
+                            .addComponent(jlNumero)
+                            .addComponent(jlPassWord))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,7 +164,11 @@ public class UsuarioConductor extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlNumero)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jlPassWord))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbModificarPerfil)
                     .addComponent(jbCerrarCuenta)
@@ -225,6 +240,7 @@ public class UsuarioConductor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JButton jbCerrarCuenta;
@@ -233,6 +249,7 @@ public class UsuarioConductor extends javax.swing.JFrame {
     private javax.swing.JLabel jlCorreo;
     private javax.swing.JLabel jlNombre;
     private javax.swing.JLabel jlNumero;
+    private javax.swing.JLabel jlPassWord;
     private javax.swing.JLabel jlUsuario;
     // End of variables declaration//GEN-END:variables
 }

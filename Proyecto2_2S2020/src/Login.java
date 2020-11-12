@@ -1,5 +1,7 @@
 
 import java.awt.ItemSelectable;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.swing.JOptionPane;
 
 /*
@@ -201,9 +203,9 @@ public class Login extends javax.swing.JFrame {
         if(jtNickName.getText().equals("") || jpPassWord.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Hay campos vacios");
             //eliminar despues de las pruebas de administrador
-            Admin admin = new Admin(usuario, conductor, tablaHash);
-            admin.setLocationRelativeTo(null);
-            admin.setVisible(true);
+            //Admin admin = new Admin(usuario, conductor, tablaHash);
+            //admin.setLocationRelativeTo(null);
+            //admin.setVisible(true);
             //dispose();
         }else if(jtNickName.getText().toLowerCase().equals("andree_avalos") && jpPassWord.getText().equalsIgnoreCase("admin") && jcbTipoUsuario.getSelectedIndex() == 2){
             JOptionPane.showMessageDialog(this, "Administrador");
@@ -215,7 +217,9 @@ public class Login extends javax.swing.JFrame {
         //usuario normal
         else if(jcbTipoUsuario.getSelectedIndex() == 0){
             Usuario usuarioCargado = null;
-            usuarioCargado = usuario.iniciarSesion(jtNickName.getText(), jpPassWord.getText());
+            //Convierto a sha256 y lo envío al metodo
+            String pass = convertirSHA256(jpPassWord.getText());
+            usuarioCargado = usuario.iniciarSesion(jtNickName.getText(), pass);
             if(usuarioCargado == null){
                 System.out.println("no se encontro el usuario");
                 JOptionPane.showMessageDialog(this, "No se encontro el usuario");
@@ -230,7 +234,9 @@ public class Login extends javax.swing.JFrame {
         //usuario conductor
         else if(jcbTipoUsuario.getSelectedIndex() == 1){
             Usuario usuarioCargado = null;
-            usuarioCargado = conductor.iniciarSesion(jtNickName.getText(), jpPassWord.getText());
+            //Convierto a sha256 y lo envío al metodo
+            String pass = convertirSHA256(jpPassWord.getText());
+            usuarioCargado = conductor.iniciarSesion(jtNickName.getText(), pass);
             if(usuarioCargado != null){
                 System.out.println("Encontre el usuario " + usuarioCargado.usuario);
                 //UsuarioConductor cargar = new UsuarioConductor(usuarioCargado, usuario, conductor);
@@ -252,6 +258,27 @@ public class Login extends javax.swing.JFrame {
         jcbTipoUsuario.setSelectedIndex(0);
     }//GEN-LAST:event_jbAceptarActionPerformed
 
+    public static String convertirSHA256(String password) {
+	MessageDigest md = null;
+	try {
+		md = MessageDigest.getInstance("SHA-256");
+	} 
+	catch (NoSuchAlgorithmException e) {		
+		e.printStackTrace();
+		return null;
+	}
+	    
+	byte[] hash = md.digest(password.getBytes());
+	StringBuffer sb = new StringBuffer();
+	    
+	for(byte b : hash) {        
+		sb.append(String.format("%02x", b));
+	}
+	    
+	return sb.toString();
+    }
+    
+    
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_jbCancelarActionPerformed

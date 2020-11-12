@@ -21,19 +21,19 @@ N0 [label = "
 node [shape=component]
 node [shape=record,width=.1,height=.1];
 N1 [label = " 
-<f0> \n \n Null \n \n \n|
-<f1> Id: 3 \n Categoria: Gasolinera \n Nombre: Gasolinera puma quetzal \n Latitud: 14.536 \n Longitud: -90.5868|
-<f2> \n \n Null \n \n \n|
-<f3> Id: 2 \n Categoria: Plaza \n Nombre: Plaza Villa nueva \n Latitud: 14.533 \n Longitud: -90.5852|
+<f0> Id: 18 \n Categoria: El Encinal \n Nombre: Altos del Encinal \n Latitud: 14.6427757 \n Longitud: -90.6051509|
+<f1> \n \n Null \n \n \n|
+<f2> Id: 17 \n Categoria: San Cristobal \n Nombre: Condominio Orleans I \n Latitud: 14.6094153 \n Longitud: -90.60915|
+<f3> Id: 19 \n Categoria: Ciudad de Guatemala \n Nombre: Torre Oakland II \n Latitud: 14.595315 \n Longitud: -90.5058908|
 <f4> \n \n Null \n \n \n|
 <f5> \n \n Null \n \n \n|
 <f6> \n \n Null \n \n \n|
 <f7> \n \n Null \n \n \n|
-<f8> \n \n Null \n \n \n|
+<f8> Id: 5 \n Categoria: Roosevelt \n Nombre: Eskala \n Latitud: 14.6341781 \n Longitud: -90.5804995|
 <f9> \n \n Null \n \n \n|
-<f10> \n \n Null \n \n \n|
-<f11> Id: 1 \n Categoria: USAC \n Nombre: T-3 \n Latitud: 14.5877 \n Longitud: -90.5536|
-<f12> \n \n Null \n \n \n ", height=2];
+<f10> Id: 1 \n Categoria: USAC \n Nombre: Facultad de Ingeniería \n Latitud: 14.5867346 \n Longitud: -90.5520608|
+<f11> Id: 6 \n Categoria: Miraflores \n Nombre: Cinépolis Miraflores \n Latitud: 14.6213358 \n Longitud: -90.5534278|
+<f12> Id: 9 \n Categoria: Ciudad de Guatemala \n Nombre: Zoológico La Aurora \n Latitud: 14.5963132 \n Longitud: -90.5456396 ", height=2];
 node [shape=component]
 N0:f0 -> N1:f0
 N0:f1 -> N1:f1
@@ -48,5 +48,5 @@ N0:f9 -> N1:f9
 N0:f10 -> N1:f10
 N0:f11 -> N1:f11
 N0:f12 -> N1:f12
-factor  [label = "factor: 0.231"];
+factor  [label = "factor: 0.538"];
 }

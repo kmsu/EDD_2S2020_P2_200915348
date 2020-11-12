@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Iterator;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -202,8 +204,12 @@ public class Admin extends javax.swing.JFrame {
                     //System.out.println("usuario: "+jUsuario.get("usuario"));
                     String correo = (String)jUsuario.get("correo");
                     //System.out.println("correo: "+jUsuario.get("correo"));
-                    String pass = (String)jUsuario.get("pass");
+                    
+                    String pass2 = (String)jUsuario.get("pass");//Cifrar con Sha256
                     //System.out.println("pass: "+jUsuario.get("pass"));
+                    //Cifro con sha256
+                    String pass = convertirSHA256(pass2);
+                    
                     String telefono = (String)jUsuario.get("telefono");
                     //System.out.println("telefono: "+jUsuario.get("telefono"));
                     //String rol = (String)jUsuario.get("rol");
@@ -249,6 +255,27 @@ public class Admin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jbCargarUsuariosActionPerformed
 
+    public String convertirSHA256(String password) {
+	MessageDigest md = null;
+	try {
+		md = MessageDigest.getInstance("SHA-256");
+	} 
+	catch (NoSuchAlgorithmException e) {		
+		e.printStackTrace();
+		return null;
+	}
+	    
+	byte[] hash = md.digest(password.getBytes());
+	StringBuffer sb = new StringBuffer();
+	    
+	for(byte b : hash) {        
+		sb.append(String.format("%02x", b));
+	}
+	    
+	return sb.toString();
+    }
+    
+    
     private void jbUsuarioNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbUsuarioNormalActionPerformed
         boolean vacio = usuario.paraReporte();
         if(vacio){
@@ -307,9 +334,10 @@ public class Admin extends javax.swing.JFrame {
                     //CARGAR TABLA HASH
                     NodoTablaHash nuevo = new NodoTablaHash(id, categoria, nombre, latitud, longitud);
                     tablaHash.insertar(nuevo);
-                    System.out.println("tabla hash actual");
-                    tablaHash.print();
-                    System.out.println("Factor: " +tablaHash.factorCarga());
+                    
+                    //System.out.println("tabla hash actual");
+                    //tablaHash.print();
+                    //System.out.println("Factor: " +tablaHash.factorCarga());
                     
                 }
                 JOptionPane.showMessageDialog(this, "Lectura del fichero con exito");

@@ -1,4 +1,6 @@
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.swing.JOptionPane;
 
 /*
@@ -177,7 +179,7 @@ public class RegistrarUsuario extends javax.swing.JFrame {
         String nombre = jtNombre.getText();
         String usuario = jtUsuario.getText();
         String correo = jtCorreo.getText();
-        String password = jtPassWord.getText();
+        String pass = jtPassWord.getText();
         String telefono = jtTelefono.getText();
         double latitud = 0;
         double longitud = 0;
@@ -185,6 +187,7 @@ public class RegistrarUsuario extends javax.swing.JFrame {
             latitud = Double.parseDouble(jtLatitud.getText());
             longitud = Double.parseDouble(jtLongitud.getText());
             //cifrar clave con sha256
+            String password = convertirSHA256(pass);
             //para tipo, true es normal, false es conductor
             if(tipo){
                 System.out.println("mayor " +usuarioB.mayor);
@@ -212,6 +215,27 @@ public class RegistrarUsuario extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jbRegistrarActionPerformed
 
+    public static String convertirSHA256(String password) {
+	MessageDigest md = null;
+	try {
+		md = MessageDigest.getInstance("SHA-256");
+	} 
+	catch (NoSuchAlgorithmException e) {		
+		e.printStackTrace();
+		return null;
+	}
+	    
+	byte[] hash = md.digest(password.getBytes());
+	StringBuffer sb = new StringBuffer();
+	    
+	for(byte b : hash) {        
+		sb.append(String.format("%02x", b));
+	}
+	    
+	return sb.toString();
+    }
+    
+    
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_jbCancelarActionPerformed
