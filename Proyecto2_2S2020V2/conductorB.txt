@@ -1,0 +1,9 @@
+digraph G {
+rankdir=TB;
+node[shape = record, style = filled];
+29 [label = "29"]
+26 [label = "26 | 28"]
+29 -> 26
+30 [label = "30 | 130"]
+29 -> 30
+}
